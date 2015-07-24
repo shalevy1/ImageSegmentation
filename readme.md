@@ -8,6 +8,9 @@ Image Eraser allows users to perform image segmentation inside browser using a v
 ![Segmentation](tutorial/giphy.gif "Example")
 
 
+![Segmentation](tutorial/last.jpg "Example")
+
+
 Following libraries & templates are used:        
 1. https://almsaeedstudio.com/    
 2. https://github.com/kyamagu/js-segment-annotator/blob/master/LICENSE    
