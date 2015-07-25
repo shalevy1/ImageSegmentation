@@ -413,11 +413,20 @@ $scope.renderSuperpixels = function(){
     var context = output_canvas.getContext('2d');
     var imageData = context.createImageData(output_canvas.width, output_canvas.height);
     var data = imageData.data;
+    var seg;
     for (var i = 0; i < results.indexMap.length; ++i) {
-            data[4 * i + 0] = (results.indexMap[i]*5)%255;
-            data[4 * i + 1] = (results.indexMap[i]*25)%255;
-            data[4 * i + 2] = (results.indexMap[i]*85)%255;
+            seg = results.segments[results.indexMap[i]];
             data[4 * i + 3] = 255;
+            if (results.indexMap[i]== results.indexMap[i+1]){  // Extremely naive pixel bondary
+                data[4 * i + 0] = seg.mp[0];
+                data[4 * i + 1] = seg.mp[1];
+                data[4 * i + 2] = seg.mp[2];
+            }
+            else{
+                data[4 * i + 0] = 0;
+                data[4 * i + 1] = 0;
+                data[4 * i + 2] = 0;
+            }
     }
     context.putImageData(imageData, 0, 0);
 };
