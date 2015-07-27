@@ -41,19 +41,20 @@ function setActiveProp(name, value) {
 function initialize_net(){
       var layer_defs = [];
       layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:3});
-      layer_defs.push({type:'conv', sx:5, filters:16, stride:1, pad:2, activation:'relu'});
-      layer_defs.push({type:'pool', sx:2, stride:2});
-      layer_defs.push({type:'conv', sx:5, filters:20, stride:1, pad:2, activation:'relu'});
-      layer_defs.push({type:'pool', sx:2, stride:2});
-      layer_defs.push({type:'conv', sx:5, filters:20, stride:1, pad:2, activation:'relu'});
-      layer_defs.push({type:'pool', sx:2, stride:2});
+      layer_defs.push({type:'fc', num_neurons:20, activation:'relu'});
+      layer_defs.push({type:'fc', num_neurons:20, activation:'relu'});
       layer_defs.push({type:'softmax', num_classes:1});
       state.net = new convnetjs.Net();
       state.net.makeLayers(layer_defs);
       state.trainer = new convnetjs.SGDTrainer(state.net, {method:'adadelta', batch_size:4, l2_decay:0.0001});
 }
 
-
+function train(){
+    var data = _.sample(state.train_data);
+    for (var index =0 ; index <state.train_data.length;index++){
+        state.trainer.train(data[index][0],data[index][1]);
+    }
+}
 
 function addAccessors($scope) {
 
@@ -351,8 +352,11 @@ $scope.labelMixed = function(){
 
 $scope.updateClusters = function(){
     var mask = state.mask_data.data,
+        pixels = state.canvas_data.data,
         segments = state.results.segments,
-        indexMap = state.results.indexMap;
+        indexMap = state.results.indexMap,
+        x,
+        y;
     state.results.unknown = [];
     state.results.mixed = [];
     state.results.foreground = [];
@@ -371,9 +375,11 @@ $scope.updateClusters = function(){
             if (mask[4 * i + 0] == 0 && mask[4 * i + 1] == 128)
             {
                 segments[value].mask.f++;
+                state.train_data.push([new convnetjs.Vol([pixels[4 * i],pixels[4 * i + 1],pixels[4 * i + 2]]),1]);
             }
             if (mask[4 * i + 0] > 0 && mask[4 * i + 1] == 0)
             {
+                state.train_data.push([new convnetjs.Vol([pixels[4 * i],pixels[4 * i + 1],pixels[4 * i + 2]]),0]);
                 segments[value].mask.b++;
             }
     }

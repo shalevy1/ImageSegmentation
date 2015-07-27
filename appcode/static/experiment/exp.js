@@ -105,8 +105,12 @@ var tour = {
       title: "Experimental ConvNetJS",
       content: "You can only upload one image at a time. But you can repeat the process to add more images and rearrange them.",
       target: document.querySelector("#btnLoad"),
-      placement: "bottom"
-    },
+      placement: "bottom",
+      onShow:function(){
+        fabric.Image.fromURL("/static/img/demo.jpg", function(oImg){canvas.add(oImg);},load_options = {crossOrigin:"Anonymous"});
+        state.recompute = true;
+      }
+    }
   ]
 };
 
