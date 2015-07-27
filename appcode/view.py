@@ -3,7 +3,7 @@ __author__ = 'aub3'
 from flask import render_template, redirect, request, abort
 from functools import wraps
 from google.appengine.api import users
-from .. import auth
+import auth
 
 def login_required(func):
     """Requires standard login credentials"""
@@ -38,8 +38,15 @@ def home():
     }
     return render_template('editor.html',payload = payload)
 
+def experiment():
+    payload = {
+        'gae_mode':True
+    }
+    return render_template('experiment.html',payload = payload)
+
 
 def add_views(app):
     app.add_url_rule('/',view_func=home)
+    app.add_url_rule('/Experiment',view_func=experiment)
 
 

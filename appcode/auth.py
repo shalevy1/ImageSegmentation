@@ -24,3 +24,7 @@ def requires_auth(f):
             return authenticate()
         return f(*args, **kwargs)
     return decorated
+
+def requires_google_auth(f):
+    raise NotImplementedError
+    pass
