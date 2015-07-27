@@ -11,6 +11,14 @@ Image Eraser allows users to perform image segmentation inside browser using a v
 ![Segmentation](tutorial/last.jpg "Example")
 
 
+Very early experimental results using ConvnetJS at http://eraseimage.com/Experiment      
+
+![ConvnetJS](tutorial/convnetjs.png "ConvnetJS")
+
+
+
+
+
 Following libraries & templates are used:        
 1. https://almsaeedstudio.com/    
 2. https://github.com/kyamagu/js-segment-annotator/blob/master/LICENSE    
