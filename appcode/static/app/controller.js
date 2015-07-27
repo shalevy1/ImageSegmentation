@@ -38,21 +38,6 @@ function setActiveProp(name, value) {
   canvas.renderAll();
 }
 
-function initialize_smart_eraser(){
-      var layer_defs = [];
-      layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:3});
-      layer_defs.push({type:'conv', sx:5, filters:16, stride:1, pad:2, activation:'relu'});
-      layer_defs.push({type:'pool', sx:2, stride:2});
-      layer_defs.push({type:'conv', sx:5, filters:20, stride:1, pad:2, activation:'relu'});
-      layer_defs.push({type:'pool', sx:2, stride:2});
-      layer_defs.push({type:'conv', sx:5, filters:20, stride:1, pad:2, activation:'relu'});
-      layer_defs.push({type:'pool', sx:2, stride:2});
-      layer_defs.push({type:'softmax', num_classes:1});
-      state.net = new convnetjs.Net();
-      state.net.makeLayers(layer_defs);
-      trainer = new convnetjs.SGDTrainer(net, {method:'adadelta', batch_size:4, l2_decay:0.0001});
-}
-
 
 
 function addAccessors($scope) {

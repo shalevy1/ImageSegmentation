@@ -14,7 +14,6 @@ var canvas = new fabric.Canvas('canvas'),
         'masks_present':false,
         'recompute':true,
         'results':{},
-        net:null,
         canvas_data:null,
         mask_data:null,
         'options':{

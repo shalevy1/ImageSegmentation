@@ -38,7 +38,7 @@ function setActiveProp(name, value) {
   canvas.renderAll();
 }
 
-function initialize_smart_eraser(){
+function initialize_net(){
       var layer_defs = [];
       layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:3});
       layer_defs.push({type:'conv', sx:5, filters:16, stride:1, pad:2, activation:'relu'});
@@ -50,7 +50,7 @@ function initialize_smart_eraser(){
       layer_defs.push({type:'softmax', num_classes:1});
       state.net = new convnetjs.Net();
       state.net.makeLayers(layer_defs);
-      trainer = new convnetjs.SGDTrainer(net, {method:'adadelta', batch_size:4, l2_decay:0.0001});
+      state.trainer = new convnetjs.SGDTrainer(state.net, {method:'adadelta', batch_size:4, l2_decay:0.0001});
 }
 
 
@@ -750,6 +750,7 @@ cveditor.controller('CanvasControls', function($scope) {
   $scope.dev = false;
   $scope.status = "Note: Images are not uploaded to server, all processing is performed within the browser.";
   $scope.current_mode = null;
+  initialize_net();
   addAccessors($scope);
   watchCanvas($scope);
 });
