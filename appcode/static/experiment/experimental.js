@@ -694,7 +694,10 @@ $scope.train = function (){
                 idata[4 * i + 3] = 255;
             }
             else{
-            idata[4 * i + 3] = 0;
+                idata[4 * i + 0] = 0;
+                idata[4 * i + 1] = 0;
+                idata[4 * i + 2] = 0;
+                idata[4 * i + 3] = 0;
             }
     }
     context.putImageData(imageData, 0, 0);
