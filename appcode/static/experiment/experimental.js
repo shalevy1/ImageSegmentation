@@ -41,7 +41,8 @@ function setActiveProp(name, value) {
 function initialize_net(){
       var layer_defs = [];
       layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:3});
-      layer_defs.push({type:'fc', num_neurons:25, activation:'relu'});
+      layer_defs.push({type:'fc', num_neurons:10, activation:'relu'});
+      layer_defs.push({type:'fc', num_neurons:5, activation:'relu'});
       layer_defs.push({type:'softmax', num_classes:2});
       state.net = new convnetjs.Net();
       state.net.makeLayers(layer_defs);
@@ -348,6 +349,7 @@ $scope.updateClusters = function(){
         pixels = state.canvas_data.data,
         segments = state.results.segments,
         indexMap = state.results.indexMap,
+        w = width,
         x,
         y;
     state.results.unknown = [];
@@ -665,10 +667,11 @@ $scope.segment = function () {
 };
 
 $scope.train = function (){
-    console.log("training started")
+    initialize_net();
+    console.time("training");
     var data = _.shuffle(state.train_data),
         predicted;
-    console.log(state.net.forward(data[51][0]).w);
+    //console.log(state.net.forward(data[51][0]).w);
     for (var index = 0 ; index <data.length;index++){
         state.trainer.train(data[index][0],data[index][1]);
     }
@@ -677,12 +680,14 @@ $scope.train = function (){
     //    predicted = r[1] > r[0] ? 1 :0;
     //    console.log(data[index][1],predicted);
     //}
-    console.log("evaluation started!");
+    console.timeEnd("training");
+    console.time("evaluation");
     var results = state.results;
     var context = output_canvas.getContext('2d');
     var imageData = context.createImageData(output_canvas.width, output_canvas.height);
     var idata = imageData.data;
-    var pixels = state.canvas_data.data
+    var pixels = state.canvas_data.data;
+    var w = width;
     var x,y;
     for (var i = 0; i < results.indexMap.length; ++i) {
             x = new convnetjs.Vol([pixels[4*i],pixels[4*i+1],pixels[4*i+2]]);
@@ -700,8 +705,8 @@ $scope.train = function (){
                 idata[4 * i + 3] = 0;
             }
     }
+    console.timeEnd("evaluation");
     context.putImageData(imageData, 0, 0);
-    console.log("evaluation finished")
 };
 
 
@@ -786,10 +791,10 @@ cveditor.controller('CanvasControls', function($scope) {
   $scope.canvas = canvas;
   $scope.output_canvas = output_canvas;
   $scope.getActiveStyle = getActiveStyle;
-  $scope.dev = false;
+  $scope.dev = true;
   $scope.status = "Note: Images are not uploaded to server, all processing is performed within the browser.";
   $scope.current_mode = null;
-  initialize_net();
+  addAccessors($scope);
   addAccessors($scope);
   watchCanvas($scope);
 });
