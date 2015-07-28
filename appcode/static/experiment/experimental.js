@@ -41,8 +41,7 @@ function setActiveProp(name, value) {
 function initialize_net(){
       var layer_defs = [];
       layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:3});
-      layer_defs.push({type:'fc', num_neurons:10, activation:'relu'});
-      layer_defs.push({type:'fc', num_neurons:5, activation:'relu'});
+      layer_defs.push({type:'fc', num_neurons:20, activation:'relu'});
       layer_defs.push({type:'softmax', num_classes:2});
       state.net = new convnetjs.Net();
       state.net.makeLayers(layer_defs);
