@@ -793,7 +793,7 @@ for (var index = 0 ; index <data.length;index++){\n\
     $scope.canvas = canvas;
     $scope.output_canvas = output_canvas;
     $scope.getActiveStyle = getActiveStyle;
-    $scope.dev = true;
+    $scope.dev = false;
     $scope.status = "Note: Images are not uploaded to server, all processing is performed within the browser.";
     $scope.current_mode = null;
     addAccessors($scope);
