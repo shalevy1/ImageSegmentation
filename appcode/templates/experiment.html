@@ -71,8 +71,8 @@
             <canvas id="canvas"  width="640" height="640"></canvas>
         </div>
         <div>
-            <h3>Neural Network</h3>
-            <textarea id="network">{[ network_text ]} </textarea>
+            <h3>Network</h3>
+            <div id="network"></div>
         </div>
         <div class="m-t">
                 <div id="dat_gui" class="gui" ng-show="getDev()"></div>
@@ -91,11 +91,11 @@
             <canvas id="output_canvas" width="640" height="640"></canvas>
             <div>
                 <h3>Training</h3>
-                <textarea id="network_train">{[ network_train ]} </textarea>
+                <div id="network_train">{[ network_train ]} </div>
             </div>
             <div>
                 <h3>Prediction</h3>
-                <textarea id="network_test">{[ network_test ]} </textarea>
+                <div id="network_test">{[ network_test ]} </div>
             </div>
         </div>
     </div>
@@ -117,6 +117,8 @@
 
 <div id="yaxis"></div>
 {% endblock %}
+
+<script>
 
 
 {% block page_js %}
@@ -140,10 +142,11 @@
     <script src="/static/convnetjs/demo/js/pica.js"></script>
     <script src="/static/hopscotch/js/hopscotch.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    <script src="/static/ace_min/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/experiment/utils.js"></script>
     <script src="/static/experiment/exp_config.js"></script>
-    <script src="/static/experiment/experimental.js"></script>
     <script src="/static/experiment/exp.js"></script>
+    <script src="/static/experiment/experimental.js"></script>
 {% endblock %}
 {% block ngblock %}ng-app="cveditor"{% endblock %}
 

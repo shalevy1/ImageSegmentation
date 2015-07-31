@@ -139,9 +139,16 @@ input[type=color] {
     display: none !important;
 }
 
-#network, #network_train, #network_test {
-    height: 100px;
+#network_train, #network_test {
+    height: 150px;
     width: 100%;
+    text-align: left;
+}
+
+#network{
+    height: 250px;
+    width: 100%;
+    text-align: left;
 }
 
 .gui  {

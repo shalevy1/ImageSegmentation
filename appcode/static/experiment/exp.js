@@ -3,6 +3,7 @@
  */
 var canvas = new fabric.Canvas('canvas'),
     output_canvas = document.getElementById('output_canvas'),
+
     width = canvas.getWidth(),
     height = canvas.getHeight(),
     jqwindow = $(window),
@@ -22,7 +23,8 @@ var canvas = new fabric.Canvas('canvas'),
             'pf':null,
             'slic':null
         }
-    };
+    },
+    network_editor,network_train_editor,network_test_editor;
 
 
 initialize_ui = function () {
@@ -71,8 +73,47 @@ initialize_ui = function () {
       delta_left = $('#output_canvas').offset().left - $('#canvas').offset().left + jqwindow.scrollLeft();
       delta_top = $('#output_canvas').offset().top - $('#canvas').offset().top + jqwindow.scrollTop();
     });
-    //fabric.Image.fromURL("/static/img/demo.jpg", function(oImg){canvas.add(oImg);},load_options = {crossOrigin:"Anonymous"});
+    network_editor = ace.edit("network");
+    network_editor.getSession().setMode("ace/mode/javascript");
+    network_train_editor = ace.edit("network_train");
+    network_train_editor.getSession().setMode("ace/mode/javascript");
+    network_test_editor = ace.edit("network_test");
+    network_test_editor.getSession().setMode("ace/mode/javascript");
+    network_editor.setValue("layer_defs = [];\n\
+\layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:3});\n\
+layer_defs.push({type:'fc', num_neurons:20, activation:'relu'});\n\
+layer_defs.push({type:'softmax', num_classes:2});\n\
+\n\
+state.net = new convnetjs.Net();\n\
+state.net.makeLayers(layer_defs);\n\
+\n\
+state.trainer = new convnetjs.SGDTrainer(state.net, {\n\
+method:'adadelta',\n\
+ batch_size:4,\n\
+ l2_decay:0.01});");
+    network_train_editor.setValue("var data = _.shuffle(state.train_data),\n\
+    predicted;\n\
+for (var index = 0 ; index <data.length;index++){\n\
+    state.trainer.train(data[index][0],data[index][1]);\n\
+}");
+    network_test_editor.setValue("for (var i = 0; i < results.indexMap.length; ++i) {\n\
+    x = new convnetjs.Vol([pixels[4*i],pixels[4*i+1],pixels[4*i+2]]);\n\
+    y = state.net.forward(x).w;\n\
+    if (y[1] > y[0]){  // naive \n\
+        idata[4 * i + 0] = pixels[4*i];\n\
+        idata[4 * i + 1] = pixels[4*i + 1];\n\
+        idata[4 * i + 2] = pixels[4*i + 2];\n\
+        idata[4 * i + 3] = 255;\n\
+    }\n\
+    else{\n\
+        idata[4 * i + 0] = 0;\n\
+        idata[4 * i + 1] = 0;\n\
+        idata[4 * i + 2] = 0;\n\
+        idata[4 * i + 3] = 0;\n\
+    }\n\
+}");
 
+    //fabric.Image.fromURL("/static/img/demo.jpg", function(oImg){canvas.add(oImg);},load_options = {crossOrigin:"Anonymous"});
 };
 
 

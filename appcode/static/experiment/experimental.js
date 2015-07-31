@@ -657,14 +657,14 @@ $scope.segment = function () {
 };
 
 $scope.initialize_net = function(){
-    eval($scope.network_text);
+    eval(network_editor.getValue());
 };
 
 
 $scope.train = function (){
     $scope.initialize_net();
     console.time("training");
-    eval($scope.network_train);
+    eval(network_train_editor.getValue());
     console.timeEnd("training");
     debugger;
     var results = state.results;
@@ -675,7 +675,7 @@ $scope.train = function (){
     var w = width;
     var x,y;
     console.time("evaluation");
-    eval($scope.network_test);
+    eval(network_test_editor.getValue());
     console.timeEnd("evaluation");
     debugger;
     context.putImageData(imageData, 0, 0);
@@ -759,36 +759,6 @@ function watchCanvas($scope) {
 
 
 cveditor.controller('CanvasControls', function($scope) {
-    $scope.network_text =  "layer_defs = [];\n\
-layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:3});\n\
-layer_defs.push({type:'fc', num_neurons:20, activation:'relu'});\n\
-layer_defs.push({type:'softmax', num_classes:2});\n\
-\n\
-state.net = new convnetjs.Net();\n\
-state.net.makeLayers(layer_defs);\n\
-\n\
-state.trainer = new convnetjs.SGDTrainer(state.net, {method:'adadelta', batch_size:4, l2_decay:0.01});";
-    $scope.network_train =  "var data = _.shuffle(state.train_data),\n\
-    predicted;\n\
-for (var index = 0 ; index <data.length;index++){\n\
-    state.trainer.train(data[index][0],data[index][1]);\n\
-}";
-    $scope.network_test = "for (var i = 0; i < results.indexMap.length; ++i) {\n\
-    x = new convnetjs.Vol([pixels[4*i],pixels[4*i+1],pixels[4*i+2]]);\n\
-    y = state.net.forward(x).w;\n\
-    if (y[1] > y[0]){  // naive \n\
-        idata[4 * i + 0] = pixels[4*i];\n\
-        idata[4 * i + 1] = pixels[4*i + 1];\n\
-        idata[4 * i + 2] = pixels[4*i + 2];\n\
-        idata[4 * i + 3] = 255;\n\
-    }\n\
-    else{\n\
-        idata[4 * i + 0] = 0;\n\
-        idata[4 * i + 1] = 0;\n\
-        idata[4 * i + 2] = 0;\n\
-        idata[4 * i + 3] = 0;\n\
-    }\n\
-}";
     $scope.yax = $('#yaxis');
     $scope.canvas = canvas;
     $scope.output_canvas = output_canvas;
