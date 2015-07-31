@@ -90,12 +90,12 @@ state.net.makeLayers(layer_defs);\n\
 state.trainer = new convnetjs.SGDTrainer(state.net, {\n\
 method:'adadelta',\n\
  batch_size:4,\n\
- l2_decay:0.01});");
+ l2_decay:0.01});",1);
     network_train_editor.setValue("var data = _.shuffle(state.train_data),\n\
     predicted;\n\
 for (var index = 0 ; index <data.length;index++){\n\
     state.trainer.train(data[index][0],data[index][1]);\n\
-}");
+}",1);
     network_test_editor.setValue("for (var i = 0; i < results.indexMap.length; ++i) {\n\
     x = new convnetjs.Vol([pixels[4*i],pixels[4*i+1],pixels[4*i+2]]);\n\
     y = state.net.forward(x).w;\n\
@@ -111,7 +111,7 @@ for (var index = 0 ; index <data.length;index++){\n\
         idata[4 * i + 2] = 0;\n\
         idata[4 * i + 3] = 0;\n\
     }\n\
-}");
+}",1);
 
     //fabric.Image.fromURL("/static/img/demo.jpg", function(oImg){canvas.add(oImg);},load_options = {crossOrigin:"Anonymous"});
 };

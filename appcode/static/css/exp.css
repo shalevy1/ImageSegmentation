@@ -139,8 +139,14 @@ input[type=color] {
     display: none !important;
 }
 
-#network_train, #network_test {
+#network_train{
     height: 150px;
+    width: 100%;
+    text-align: left;
+}
+
+#network_test {
+    height: 300px;
     width: 100%;
     text-align: left;
 }
