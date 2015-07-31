@@ -70,6 +70,10 @@
         <div id="canvas-wrapper">
             <canvas id="canvas"  width="640" height="640"></canvas>
         </div>
+        <div>
+            <h3>Neural Network</h3>
+            <textarea id="network">{[ network_text ]} </textarea>
+        </div>
         <div class="m-t">
                 <div id="dat_gui" class="gui" ng-show="getDev()"></div>
         </div>
@@ -85,6 +89,14 @@
             </div>
             <!--<canvas id="output_canvas" ng-click="addOnClick($event)" width="640" height="640"></canvas>-->
             <canvas id="output_canvas" width="640" height="640"></canvas>
+            <div>
+                <h3>Training</h3>
+                <textarea id="network_train">{[ network_train ]} </textarea>
+            </div>
+            <div>
+                <h3>Prediction</h3>
+                <textarea id="network_test">{[ network_test ]} </textarea>
+            </div>
         </div>
     </div>
 </div>

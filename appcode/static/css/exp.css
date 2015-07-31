@@ -139,6 +139,11 @@ input[type=color] {
     display: none !important;
 }
 
+#network, #network_train, #network_test {
+    height: 100px;
+    width: 100%;
+}
+
 .gui  {
     display: inline-block;
     width: 95%;

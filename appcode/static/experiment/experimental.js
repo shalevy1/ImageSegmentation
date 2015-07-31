@@ -38,15 +38,6 @@ function setActiveProp(name, value) {
   canvas.renderAll();
 }
 
-function initialize_net(){
-      var layer_defs = [];
-      layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:3});
-      layer_defs.push({type:'fc', num_neurons:20, activation:'relu'});
-      layer_defs.push({type:'softmax', num_classes:2});
-      state.net = new convnetjs.Net();
-      state.net.makeLayers(layer_defs);
-      state.trainer = new convnetjs.SGDTrainer(state.net, {method:'adadelta', batch_size:4, l2_decay:0.01});
-}
 
 
 function addAccessors($scope) {
@@ -665,22 +656,17 @@ $scope.segment = function () {
     }
 };
 
+$scope.initialize_net = function(){
+    eval($scope.network_text);
+};
+
+
 $scope.train = function (){
-    initialize_net();
+    $scope.initialize_net();
     console.time("training");
-    var data = _.shuffle(state.train_data),
-        predicted;
-    //console.log(state.net.forward(data[51][0]).w);
-    for (var index = 0 ; index <data.length;index++){
-        state.trainer.train(data[index][0],data[index][1]);
-    }
-    //for (var index = 0 ; index <data.length;index++){
-    //    var r = state.net.forward(data[index][0]).w;
-    //    predicted = r[1] > r[0] ? 1 :0;
-    //    console.log(data[index][1],predicted);
-    //}
+    eval($scope.network_train);
     console.timeEnd("training");
-    console.time("evaluation");
+    debugger;
     var results = state.results;
     var context = output_canvas.getContext('2d');
     var imageData = context.createImageData(output_canvas.width, output_canvas.height);
@@ -688,23 +674,10 @@ $scope.train = function (){
     var pixels = state.canvas_data.data;
     var w = width;
     var x,y;
-    for (var i = 0; i < results.indexMap.length; ++i) {
-            x = new convnetjs.Vol([pixels[4*i],pixels[4*i+1],pixels[4*i+2]]);
-            y = state.net.forward(x).w;
-            if (y[1] > y[0]){  // Extremely naive pixel bondary
-                idata[4 * i + 0] = pixels[4*i];
-                idata[4 * i + 1] = pixels[4*i + 1];
-                idata[4 * i + 2] = pixels[4*i + 2];
-                idata[4 * i + 3] = 255;
-            }
-            else{
-                idata[4 * i + 0] = 0;
-                idata[4 * i + 1] = 0;
-                idata[4 * i + 2] = 0;
-                idata[4 * i + 3] = 0;
-            }
-    }
+    console.time("evaluation");
+    eval($scope.network_test);
     console.timeEnd("evaluation");
+    debugger;
     context.putImageData(imageData, 0, 0);
 };
 
@@ -786,14 +759,44 @@ function watchCanvas($scope) {
 
 
 cveditor.controller('CanvasControls', function($scope) {
-  $scope.yax = $('#yaxis');
-  $scope.canvas = canvas;
-  $scope.output_canvas = output_canvas;
-  $scope.getActiveStyle = getActiveStyle;
-  $scope.dev = true;
-  $scope.status = "Note: Images are not uploaded to server, all processing is performed within the browser.";
-  $scope.current_mode = null;
-  addAccessors($scope);
-  addAccessors($scope);
-  watchCanvas($scope);
+    $scope.network_text =  "layer_defs = [];\n\
+layer_defs.push({type:'input', out_sx:1, out_sy:1, out_depth:3});\n\
+layer_defs.push({type:'fc', num_neurons:20, activation:'relu'});\n\
+layer_defs.push({type:'softmax', num_classes:2});\n\
+\n\
+state.net = new convnetjs.Net();\n\
+state.net.makeLayers(layer_defs);\n\
+\n\
+state.trainer = new convnetjs.SGDTrainer(state.net, {method:'adadelta', batch_size:4, l2_decay:0.01});";
+    $scope.network_train =  "var data = _.shuffle(state.train_data),\n\
+    predicted;\n\
+for (var index = 0 ; index <data.length;index++){\n\
+    state.trainer.train(data[index][0],data[index][1]);\n\
+}";
+    $scope.network_test = "for (var i = 0; i < results.indexMap.length; ++i) {\n\
+    x = new convnetjs.Vol([pixels[4*i],pixels[4*i+1],pixels[4*i+2]]);\n\
+    y = state.net.forward(x).w;\n\
+    if (y[1] > y[0]){  // naive \n\
+        idata[4 * i + 0] = pixels[4*i];\n\
+        idata[4 * i + 1] = pixels[4*i + 1];\n\
+        idata[4 * i + 2] = pixels[4*i + 2];\n\
+        idata[4 * i + 3] = 255;\n\
+    }\n\
+    else{\n\
+        idata[4 * i + 0] = 0;\n\
+        idata[4 * i + 1] = 0;\n\
+        idata[4 * i + 2] = 0;\n\
+        idata[4 * i + 3] = 0;\n\
+    }\n\
+}";
+    $scope.yax = $('#yaxis');
+    $scope.canvas = canvas;
+    $scope.output_canvas = output_canvas;
+    $scope.getActiveStyle = getActiveStyle;
+    $scope.dev = true;
+    $scope.status = "Note: Images are not uploaded to server, all processing is performed within the browser.";
+    $scope.current_mode = null;
+    addAccessors($scope);
+    addAccessors($scope);
+    watchCanvas($scope);
 });
