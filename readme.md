@@ -11,7 +11,7 @@ Image Eraser allows users to perform image segmentation inside browser using a v
 ![Segmentation](tutorial/last.jpg "Example")
 
 
-Very early experimental results using ConvnetJS (ordinary NN not deep) at http://eraseimage.com/Experiment      
+Very early experimental results using ConvnetJS (ordinary NN not deep net) at  [http://www.eraseimage.com/Experiment](http://www.eraseimage.com/Experiment)      
 
 ![ConvnetJS](tutorial/convnetjs.png "ConvnetJS")
 
