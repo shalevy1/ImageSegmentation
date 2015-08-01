@@ -124,6 +124,9 @@ function addAccessors($scope) {
     canvas.renderAll();
   };
 
+$scope.exportNetwork =function(){
+    $scope.network_json = JSON.stringify(state.net.toJSON());
+};
 
 $scope.export = function() {
     if (!fabric.Canvas.supports('toDataURL')) {
@@ -766,6 +769,7 @@ cveditor.controller('CanvasControls', function($scope) {
     $scope.dev = false;
     $scope.status = "Note: Images are not uploaded to server, all processing is performed within the browser.";
     $scope.current_mode = null;
+    $scope.network_json = ""
     addAccessors($scope);
     addAccessors($scope);
     watchCanvas($scope);

@@ -112,8 +112,7 @@ for (var index = 0 ; index <data.length;index++){\n\
         idata[4 * i + 3] = 0;\n\
     }\n\
 }",1);
-
-    //fabric.Image.fromURL("/static/img/demo.jpg", function(oImg){canvas.add(oImg);},load_options = {crossOrigin:"Anonymous"});
+    fabric.Image.fromURL("/static/img/demo.jpg", function(oImg){canvas.add(oImg);},load_options = {crossOrigin:"Anonymous"});
 };
 
 

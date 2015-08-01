@@ -157,6 +157,12 @@ input[type=color] {
     text-align: left;
 }
 
+#network_json{
+    height: 200px;
+    width: 100%;
+    text-align: left;
+}
+
 .gui  {
     display: inline-block;
     width: 95%;
