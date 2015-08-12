@@ -173,12 +173,13 @@ $scope.export = function() {
 
 
 $scope.resetZoom = function(){
-      var newZoom = 1.0;
-      canvas.absolutePan({x:0,y:0});
-      canvas.setZoom(newZoom);
-      state.recompute = true;
-      renderVieportBorders();
-      return false;
+    var newZoom = 1.0;
+    canvas.absolutePan({x:0,y:0});
+    canvas.setZoom(newZoom);
+    state.recompute = true;
+    renderVieportBorders();
+    console.log("zoom reset")
+    return false;
 };
 
 $scope.sendBackwards = function() {
