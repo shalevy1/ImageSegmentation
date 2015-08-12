@@ -3,13 +3,13 @@ Image Eraser by Akshay Bhat
 [http://eraseimage.com/](http://eraseimage.com/)
 Image Eraser allows users to perform image segmentation inside browser using a vector editor (FabricJS) and JS implementations of superpixel algorithms.   
 
-Very early experimental results using ConvnetJS (ordinary NN not deep net) and support for Zoom In/Out using scorllwheel / touchpad at  [http://www.eraseimage.com/Experiment](http://www.eraseimage.com/Experiment)      
+Very early experimental results using ConvnetJS (ordinary NN not deep net) and support for Zoom In/Out using scrollwheel/touchpad at  [http://www.eraseimage.com/Experiment](http://www.eraseimage.com/Experiment)      
 
-#Using SLIC implementation     
+#### Using SLIC implementation     
 ![Segmentation](tutorial/giphy.gif "Example")     
 
    
-#Using Pixelwise prediction using ConvnetJS (with Zoom support)       
+#### Using Pixelwise prediction using ConvnetJS (with Zoom support)       
 ![ConvnetJS](tutorial/convnetjs.png "ConvnetJS")
 
 
