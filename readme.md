@@ -5,11 +5,11 @@ Image Eraser allows users to perform image segmentation inside browser using a v
 
 Very early experimental results using ConvnetJS (ordinary NN not deep net) and support for Zoom In/Out using scrollwheel/touchpad at  [http://www.eraseimage.com/Experiment](http://www.eraseimage.com/Experiment)      
 
-#### Using SLIC implementation     
+#### Using SLIC superpixels     
 ![Segmentation](tutorial/giphy.gif "Example")     
 
    
-#### Using Pixelwise prediction using ConvnetJS (with Zoom support)       
+#### Pixelwise prediction using ConvnetJS (with Zoom support)       
 ![ConvnetJS](tutorial/convnetjs.png "ConvnetJS")
 
 
