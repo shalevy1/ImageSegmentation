@@ -141,12 +141,13 @@ for (var index = 0 ; index <data.length;index++){\n\
 
 
 (function() {
-
     $(canvas.getElement().parentNode).on('mousewheel', function(e) {
       var newZoom = canvas.getZoom() + e.deltaY / 300;
-      canvas.zoomToPoint({ x: e.offsetX, y: e.offsetY }, newZoom);
-      state.recompute = true;
-      renderVieportBorders();
+        if (newZoom > 0.1 && newZoom < 10){
+            canvas.zoomToPoint({ x: e.offsetX, y: e.offsetY }, newZoom);
+            state.recompute = true;
+            renderVieportBorders();
+        }
       return false;
     });
 
