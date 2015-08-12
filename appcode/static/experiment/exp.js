@@ -120,8 +120,6 @@ for (var index = 0 ; index <data.length;index++){\n\
 
 
 
-
-(function() {
     function renderVieportBorders() {
       var ctx = canvas.getContext();
       ctx.save();
@@ -139,6 +137,10 @@ for (var index = 0 ; index <data.length;index++){\n\
         canvas.getHeight() * canvas.getZoom());
       ctx.restore();
     }
+
+
+
+(function() {
 
     $(canvas.getElement().parentNode).on('mousewheel', function(e) {
       var newZoom = canvas.getZoom() + e.deltaY / 300;
