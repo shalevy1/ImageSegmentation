@@ -9,10 +9,10 @@
         <div class="inner">
         <button type="button" class="btn  bg-red btn-app btn-move"  id="clear" ng-click="confirmClear()"><i class="fa fa-trash"></i>Clean editor</button>
         <button type="button" class="btn  bg-yellow btn-app btn-move"  id="clear_mask" ng-click="confirmClearMasks()"><i class="fa fa-trash"></i> Clear masks</button>
+        <button type="button" class="btn  bg-green btn-app btn-move"  id="reset_zoom" ng-click="resetZoom()"><i class="fa fa-search"></i> Reset Zoom</button>
         <div ng-show="canvas.getActiveGroup()">
             <button type="button" class="btn btn-app btn-danger btn-object-action bg-maroon btn-move" id="remove-selected-group" ng-click="removeSelected()"><i class="fa fa-trash"></i>Delete</button>
             <button type="button" class="btn btn-app btn-object-action bg-yellow btn-move" id="deselect_group" ng-click="deselect()"><i class="fa fa-minus"></i>Deselect</button>
-
         </div>
         <div ng-show="canvas.getActiveObject()">
             <button type="button" class="btn btn-app btn-danger btn-object-action bg-maroon btn-move" id="remove-selected" ng-click="removeSelected()"><i class="fa fa-minus"></i>Delete</button>
@@ -73,6 +73,14 @@
         <div class="m-t">
                 <div id="dat_gui" class="gui" ng-show="getDev()"></div>
         </div>
+        <div ng-show="getConvnet()">
+            <h3>Network</h3>
+            <div id="network"></div>
+        </div>
+        <div ng-show="getConvnet()">
+            <h3>Serialized Network as JSON</h3>
+            <textarea id="network_json">{[ network_json ]}</textarea>
+        </div>
     </div>
     <div class="col-xs-5 output m-t">
         <div style="width:650px;">
@@ -85,6 +93,14 @@
             </div>
             <!--<canvas id="output_canvas" ng-click="addOnClick($event)" width="640" height="640"></canvas>-->
             <canvas id="output_canvas" width="640" height="640"></canvas>
+            <div ng-show="getConvnet()">
+                <h3>Training</h3>
+                <div id="network_train">{[ network_train ]} </div>
+            </div>
+            <div ng-show="getConvnet()">
+                <h3>Prediction</h3>
+                <div id="network_test">{[ network_test ]} </div>
+            </div>
         </div>
     </div>
 </div>
@@ -117,6 +133,7 @@
     <!--[if lt IE 9]>
         <script src="/static/fabric/excanvas.js"></script>
     <![endif]-->
+    <script src="/static/plugins/jquery.mousewheel.min.js"></script>
     <script src="/static/plugins/underscore-min.js"></script>
     <script src="/static/fabric/fabric.js"></script>
     <script type="text/javascript" src="/static/vision/jsfeat-min.js"></script>
@@ -124,8 +141,14 @@
     <script type="text/javascript" src="/static/vision/pf-segmentation.js"></script>
     <script type="text/javascript" src="/static/vision/compatibility.js"></script>
     <script type="text/javascript" src="/static/vision/dat.gui.min.js"></script>
+    <script src="/static/convnetjs/build/vis.js"></script>
+    <script src="/static/convnetjs/build/util.js"></script>
+    <script src="/static/convnetjs/build/convnet.js"></script>
+    <script src="/static/convnetjs/demo/js/image-helpers.js"></script>
+    <script src="/static/convnetjs/demo/js/pica.js"></script>
     <script src="/static/hopscotch/js/hopscotch.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    <script src="/static/ace_min/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/app/utils.js"></script>
     <script src="/static/app/app_config.js"></script>
     <script src="/static/app/controller.js"></script>
@@ -147,8 +170,8 @@
                     <button type="button" class="close" ng-click="disableStatus()" aria-hidden="true">x</button>
                 </div>
                 </li>
-                <li><a ng-click="showDev()" href="#" id="dev"><i class="fa fa-help"></i>{[ dev ? 'Hide' : 'Show' ]} Developer options</a></li>
                 <li><a ng-click="showTour()" href="#" id="tutorial"><i class="fa fa-help"></i>Tutorial</a></li>
-                <li><a href="/Experiment"><i class="fa fa-help"></i>ConvnetJS</a></li>
+                <li><a ng-click="showDev()" href="#" id="dev">{[ dev ? 'Hide' : 'Show' ]} Dev options</a></li>
+                <li><a ng-click="convnetModeEnable()">Show ConvnetJS</a></li>
                 <li><a href="https://github.com/AKSHAYUBHAT/ImageSegmentation" target="_blank" id="github"><i class="fa fa-github"></i> Github</a></li>
 {% endblock %}
