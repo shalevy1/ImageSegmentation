@@ -21,7 +21,8 @@ Following libraries & templates are used:
 4. http://inspirit.github.io/jsfeat/    
 5. http://linkedin.github.io/hopscotch/    
 6. https://github.com/karpathy/convnetjs    
-7. http://ace.c9.io/
+7. http://ace.c9.io/            
+8. https://github.com/axemclion/seamcarving
 
 License:     
 Copyright 2015, Cornell University. All Rights Reserved. 

@@ -73,14 +73,6 @@
         <div class="m-t">
                 <div id="dat_gui" class="gui" ng-show="getDev()"></div>
         </div>
-        <div ng-show="getConvnet()">
-            <h3>Network</h3>
-            <div id="network"></div>
-        </div>
-        <div ng-show="getConvnet()">
-            <h3>Serialized Network as JSON</h3>
-            <textarea id="network_json">{[ network_json ]}</textarea>
-        </div>
     </div>
     <div class="col-xs-5 output m-t">
         <div style="width:650px;">
@@ -93,14 +85,6 @@
             </div>
             <!--<canvas id="output_canvas" ng-click="addOnClick($event)" width="640" height="640"></canvas>-->
             <canvas id="output_canvas" width="640" height="640"></canvas>
-            <div ng-show="getConvnet()">
-                <h3>Training</h3>
-                <div id="network_train">{[ network_train ]} </div>
-            </div>
-            <div ng-show="getConvnet()">
-                <h3>Prediction</h3>
-                <div id="network_test">{[ network_test ]} </div>
-            </div>
         </div>
     </div>
 </div>
@@ -141,14 +125,8 @@
     <script type="text/javascript" src="/static/vision/pf-segmentation.js"></script>
     <script type="text/javascript" src="/static/vision/compatibility.js"></script>
     <script type="text/javascript" src="/static/vision/dat.gui.min.js"></script>
-    <script src="/static/convnetjs/build/vis.js"></script>
-    <script src="/static/convnetjs/build/util.js"></script>
-    <script src="/static/convnetjs/build/convnet.js"></script>
-    <script src="/static/convnetjs/demo/js/image-helpers.js"></script>
-    <script src="/static/convnetjs/demo/js/pica.js"></script>
     <script src="/static/hopscotch/js/hopscotch.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
-    <script src="/static/ace_min/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/app/utils.js"></script>
     <script src="/static/app/app_config.js"></script>
     <script src="/static/app/controller.js"></script>
@@ -172,6 +150,6 @@
                 </li>
                 <li><a ng-click="showTour()" href="#" id="tutorial"><i class="fa fa-help"></i>Tutorial</a></li>
                 <li><a ng-click="showDev()" href="#" id="dev">{[ dev ? 'Hide' : 'Show' ]} Dev options</a></li>
-                <li><a ng-click="convnetModeEnable()">Show ConvnetJS</a></li>
+                <li><a href="/Experiment">Convnet version</a></li>
                 <li><a href="https://github.com/AKSHAYUBHAT/ImageSegmentation" target="_blank" id="github"><i class="fa fa-github"></i> Github</a></li>
 {% endblock %}
