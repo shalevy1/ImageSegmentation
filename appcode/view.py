@@ -44,9 +44,16 @@ def experiment():
     }
     return render_template('experiment.html',payload = payload)
 
+def carving():
+    payload = {
+        'gae_mode':True
+    }
+    return render_template('seamcarving.html',payload = payload)
+
 
 def add_views(app):
     app.add_url_rule('/',view_func=home)
     app.add_url_rule('/Experiment',view_func=experiment)
+    app.add_url_rule('/Erase',view_func=carving)
 
 
