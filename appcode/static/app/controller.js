@@ -491,6 +491,9 @@ var callbackSegmentation  = function(results){
                     'mask':{'b':0,'f':0},
                     'count':0,
                     'mp':[0,0,0],
+                    'hred': new Uint32Array(256),
+                    'hgreen':new Uint32Array(256),
+                    'hblue':new Uint32Array(256)
                     }
             }
             var y = Math.floor(i/w), x = (i % w);
@@ -498,11 +501,13 @@ var callbackSegmentation  = function(results){
             {
                 console.log(["Error?",i,x + y*w])
             }
-
             results.segments[current].count += 1;
             results.segments[current].mp[0] += results.rgbData[4 * i];
             results.segments[current].mp[1] += results.rgbData[4 * i + 1];
             results.segments[current].mp[2] += results.rgbData[4 * i + 2];
+            results.segments[current].hred[results.rgbData[4 * i]] += 1;
+            results.segments[current].hgreen[results.rgbData[4 * i + 1]] += 1;
+            results.segments[current].hblue[results.rgbData[4 * i + 2]] += 1;
             results.segments[current].max_pixel = i;
             if (x > results.segments[current].max_x){
                 results.segments[current].max_x = x
