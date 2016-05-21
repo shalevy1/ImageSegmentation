@@ -1,13 +1,6 @@
 Image Eraser by Akshay Bhat
 =============================
-[http://eraseimage.com/](http://eraseimage.com/)
-
-### I am currently transitioning Erase Image from Google App Engine to Google Firebase.   
- 
-### In case of errors try [https://image-segmentation.firebaseapp.com](https://image-segmentation.firebaseapp.com)
-
- 
-
+[https://eraseimage.com/](https://eraseimage.com/)
 
 Image Eraser allows users to perform image segmentation inside browser using a vector editor (FabricJS) and JS implementations of superpixel algorithms.   
 
