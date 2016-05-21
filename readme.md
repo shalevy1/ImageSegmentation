@@ -14,7 +14,7 @@ Following libraries & templates are used:
 3. http://fabricjs.com/kitchensink/     
 4. http://inspirit.github.io/jsfeat/    
 5. http://linkedin.github.io/hopscotch/       
-7. http://ace.c9.io/
+7. http://ace.c9.io/         
 8. https://firebase.google.com
 
 License:     
