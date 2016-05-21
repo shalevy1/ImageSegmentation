@@ -1,6 +1,6 @@
 Image Eraser by Akshay Bhat
 =============================
-[https://eraseimage.com/](https://eraseimage.com/)
+[https://www.eraseimage.com/](https://www.eraseimage.com/)
 
 Image Eraser allows users to perform image segmentation inside browser using a vector editor (FabricJS) and JS implementations of superpixel algorithms.   
 
