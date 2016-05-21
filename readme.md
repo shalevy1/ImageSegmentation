@@ -13,10 +13,9 @@ Following libraries & templates are used:
 2. https://github.com/kyamagu/js-segment-annotator/blob/master/LICENSE    
 3. http://fabricjs.com/kitchensink/     
 4. http://inspirit.github.io/jsfeat/    
-5. http://linkedin.github.io/hopscotch/    
-6. https://github.com/karpathy/convnetjs    
-7. http://ace.c9.io/            
-8. https://github.com/axemclion/seamcarving
+5. http://linkedin.github.io/hopscotch/       
+7. http://ace.c9.io/
+8. https://firebase.google.com
 
 License:     
 Copyright 2015, Cornell University. All Rights Reserved. 
