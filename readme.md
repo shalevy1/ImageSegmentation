@@ -16,6 +16,3 @@ Following libraries & templates are used:
 5. http://linkedin.github.io/hopscotch/       
 7. http://ace.c9.io/         
 8. https://firebase.google.com
-
-License:     
-Copyright 2015, Cornell University. All Rights Reserved. 
